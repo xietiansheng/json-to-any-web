@@ -1,13 +1,6 @@
 <template>
   <el-row class="toolbar-wrapper flex items-center px-2">
-    <el-col
-      :xs="21"
-      :sm="12"
-      :md="12"
-      :lg="12"
-      :xl="24"
-      class="flex items-center"
-    >
+    <el-col :xs="21" :span="12" class="flex items-center">
       <div class="flex items-center">
         <svg-icon name="logo" width="26" height="30" class="mr-2" />
         <div class="flex-1 flex items-baseline">
@@ -26,7 +19,7 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="0" :sm="12" :md="12" :lg="12" :xl="12">
+    <el-col :xs="0" :span="12">
       <div class="flex justify-end">
         <el-select v-model="commonStore.codeTypeVal" placeholder="选择语言">
           <el-option
@@ -42,7 +35,7 @@
         </el-select>
       </div>
     </el-col>
-    <el-col :xs="3" :sm="0" :md="0" :lg="0" :xl="0">
+    <el-col :xs="3" :span="0">
       <div class="flex justify-end">
         <el-dropdown ref="dropdown" trigger="contextmenu">
           <template #dropdown>
