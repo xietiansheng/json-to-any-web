@@ -1,12 +1,13 @@
 import { parse, transformCode } from "json-to-any";
-import { transformName } from "@/view/home/utils";
+import { formatKey, transformName } from "@/view/home/utils";
 import { CodeTypeTransform } from "@/view/home/code-type/index";
 
 export const ToTypescript: CodeTypeTransform = (json) => {
   const entities = parse(json);
   // 将所有实体类名统一
   entities.forEach((entity) => {
-    entity.key = transformName(entity.key, { firstChatUpperCase: true });
+    const { upKey } = formatKey(entity.key);
+    entity.key = upKey;
   });
   const strToTsCode = (key: string, value: string) =>
     `  ${transformName(key)}${value};\n`;
@@ -24,8 +25,9 @@ export const ToTypescript: CodeTypeTransform = (json) => {
     },
     array({ property }) {
       const childProperty = property.childProperty;
+      const { upKey } = formatKey(childProperty.key);
       if (childProperty.type === "object") {
-        return strToTsCode(property.key, `: ${property.childProperty.key}[]`);
+        return strToTsCode(property.key, `: ${upKey}[]`);
       }
       if (childProperty.type === "null") {
         return strToTsCode(property.key, `?: any[]`);
