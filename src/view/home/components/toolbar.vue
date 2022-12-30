@@ -2,7 +2,14 @@
   <el-row class="toolbar-wrapper flex items-center px-2">
     <el-col :xs="21" :span="12" class="flex items-center">
       <div class="flex items-center">
-        <svg-icon name="logo" width="26" height="30" class="mr-2" />
+        <el-link
+          href="https://www.npmjs.com/package/json-to-any"
+          target="_blank"
+          :underline="false"
+          type="primary"
+        >
+          <svg-icon name="logo" width="26" height="30" class="mr-2" />
+        </el-link>
         <div class="flex-1 flex items-baseline">
           <h2>JsonToAny</h2>
           <div class="hint-text text-sm text-gray-500">
@@ -10,6 +17,7 @@
             <el-link
               href="https://www.npmjs.com/package/json-to-any"
               target="_blank"
+              :underline="false"
               type="primary"
             >
               json-to-any
@@ -48,7 +56,7 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-icon size="15" @click="showClick"> </el-icon>
+        <el-icon size="15" @click="showClick"></el-icon>
       </div>
     </el-col>
   </el-row>

@@ -6,8 +6,6 @@
   "scripts": {
     "dev": "vite --mode development",
     "build:dev": "vue-tsc && vite build --mode development",
-    "build:test": "vue-tsc && vite build --mode test",
-    "build:pre": "vue-tsc && vite build --mode preview",
     "build:prod": "vite build --mode production && npm run preview",
     "preview": "vite preview",
     "lint": "npm run lint:script && npm run lint:style",
