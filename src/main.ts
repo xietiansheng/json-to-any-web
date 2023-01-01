@@ -13,9 +13,13 @@ import "element-plus/dist/index.css";
 // 暗黑模式
 import "element-plus/theme-chalk/dark/css-vars.css";
 
-const pinia = createPinia();
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 
+const pinia = createPinia();
 pinia.use(persistedState);
 const app = createApp(App);
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
 app.use(pinia);
 app.mount("#app");

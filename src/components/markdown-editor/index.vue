@@ -1,8 +1,8 @@
 <template>
   <mark-down-editor
     v-model="mdText"
+    class="mark-down-container"
     preview-only
-    style="height: calc(100vh - 40px)"
     theme="dark"
   />
 </template>
@@ -29,9 +29,12 @@ const mdText = computed({
 </script>
 
 <style lang="scss" scoped>
-:deep(.md-editor-content) {
-  .md-editor-preview-wrapper {
-    background-color: #1a1a1a !important;
+.mark-down-container {
+  height: $code-wrapper-height;
+  :deep(.md-editor-content) {
+    .md-editor-preview-wrapper {
+      background-color: #1a1a1a !important;
+    }
   }
 }
 </style>

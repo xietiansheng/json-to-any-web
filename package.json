@@ -14,6 +14,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.25",
     "json-to-any": "^5.0.3",
     "md-editor-v3": "^2.6.0",

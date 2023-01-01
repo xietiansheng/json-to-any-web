@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 # dist gitee pages 需要使用到dist文件夹
 *.local
+./stats.html
 
 # Editor directories and files
 .vscode/extensions.json

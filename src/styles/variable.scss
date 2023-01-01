@@ -1,10 +1,16 @@
 /* color */
-$main-color: #409eff;
+$main-color: rgb(0, 188, 212);
 $success-color: #67c23a;
 $warning-color: #e6a23c;
 $danger-color: #f56c6c;
 $info-color: #909399;
 
+$main-bg-color: rgb(44, 62, 80);
+
 :root {
   --main-color: $main-color;
 }
+
+$header-height: 80px;
+$tool-header-height: 35px;
+$code-wrapper-height: calc(100vh - $header-height - $tool-header-height - 40px)

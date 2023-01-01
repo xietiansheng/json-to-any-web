@@ -2,7 +2,7 @@ import { ToTypescript } from "@/view/home/code-type/code-ts";
 import { ToJava } from "@/view/home/code-type/code-java";
 import { ToDart } from "@/view/home/code-type/code-dart";
 
-interface CodeType {
+export interface CodeType {
   label: string;
   value: number;
   disabled?: boolean;
