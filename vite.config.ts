@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
         open: true,
       }),
       BeautifyConsolePlugin({
-        title: "Vite",
+        title: "JsonToAny",
         info: "Log",
       }),
       AutoImport({

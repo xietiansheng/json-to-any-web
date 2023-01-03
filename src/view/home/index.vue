@@ -52,9 +52,9 @@ const jsonCode = ref<string | object>({
   strList: [1, 34],
   orderList: [{}, "特殊数据做any处理", true],
 });
-const onJsonChanged = (json: string) => jsonToTs(json);
+const onJsonChanged = (json: string) => (jsonCode.value = json);
 const mdCodeText = ref<string>("");
-const jsonToTs = (json: string | Record<any, any>) => {
+const jsonToCode = (json: string | Record<any, any>) => {
   const codeType = codeTypeList.find(
     (item) => item.value === curCodeType.value.value
   );
@@ -63,7 +63,7 @@ const jsonToTs = (json: string | Record<any, any>) => {
   }
 };
 
-watch(curCodeType, () => jsonToTs(jsonCode.value), {
+watch([curCodeType, jsonCode], () => jsonToCode(jsonCode.value), {
   immediate: true,
 });
 </script>
