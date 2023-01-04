@@ -26,6 +26,8 @@
 ## 📝 使用
 
 在线地址：[http://xiets.gitee.io/json-to-any-web/](http://xiets.gitee.io/json-to-any-web/)
+（ [Gitee](https://gitee.com/XieTS/json-to-any-web) /
+[GitHub](https://github.com/xietiansheng/json-to-any-web) ）
 
 当然，你也可以 `Fork` 该项目对代码的生成结果进行定制化开发，自由操控生成结果。
 
@@ -45,7 +47,7 @@
 
 ## 🔨 开发
 
-```cmd
+```bash
 # gitee
 git clone https://gitee.com/XieTS/json-to-any-web.git
 # github
