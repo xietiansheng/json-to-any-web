@@ -13,7 +13,7 @@ export const ToTypescript: CodeTypeTransform = (json) => {
     `  ${transformName(key)}${value};\n`;
   const code = transformCode(entities, {
     before({ entity }) {
-      return `interface ${entity.key} {\n`;
+      return `export interface ${entity.key} {\n`;
     },
     default({ property }) {
       // key: value;
