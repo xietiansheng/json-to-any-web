@@ -1,6 +1,6 @@
 import { parse, transformCode } from "json-to-any";
-import { transformName } from "@/view/home/utils";
-import { CodeTypeTransform } from "@/view/home/code-type/index";
+import { CodeTypeTransform } from "@/types/code-type";
+import { transformName } from "@/utils/code-util";
 
 export const ToJava: CodeTypeTransform = (json) => {
   const entities = parse(json);

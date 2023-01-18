@@ -1,6 +1,6 @@
 import { parse, transformCode } from "json-to-any";
-import { formatKey, transformName } from "@/view/home/utils";
-import { CodeTypeTransform } from "@/view/home/code-type/index";
+import { CodeTypeTransform } from "@/types/code-type";
+import { formatKey, transformName } from "@/utils/code-util";
 
 export const ToDart: CodeTypeTransform = (json) => {
   const entities = parse(json);

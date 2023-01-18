@@ -14,7 +14,8 @@
         <el-col :xs="24" :span="12">
           <div class="flex-1" style="height: 100%">
             <div class="result-header">
-              <select-code-type />
+              <result-setting />
+              <code-type-selector class="pl-10px" />
             </div>
             <markdown-editor v-model="mdCodeText" />
           </div>
@@ -27,14 +28,11 @@
 
 <script lang="ts" setup>
 import { ref, watch } from "vue";
-import Toolbar from "@/view/home/components/Toolbar.vue";
-import GithubLogo from "@/components/github-logo/index.vue";
 import { useCommonStore } from "@/store/common";
-import { codeTypeList } from "@/view/home/code-type";
 import { storeToRefs } from "pinia";
-import SelectCodeType from "@/view/home/components/CodeTypeSelector.vue";
+import { codeTypeList } from "@/config";
 
-const { curCodeType } = storeToRefs(useCommonStore());
+const { curCodeType, jointSymbolValues } = storeToRefs(useCommonStore());
 
 const jsonCode = ref<string | object>({
   title: "JsonToAny 示例JSON (包含所有数据格式)",
@@ -63,9 +61,13 @@ const jsonToCode = (json: string | Record<any, any>) => {
   }
 };
 
-watch([curCodeType, jsonCode], () => jsonToCode(jsonCode.value), {
-  immediate: true,
-});
+watch(
+  [curCodeType, jsonCode, jointSymbolValues],
+  () => jsonToCode(jsonCode.value),
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <style lang="scss" scoped>
@@ -80,10 +82,11 @@ watch([curCodeType, jsonCode], () => jsonToCode(jsonCode.value), {
 
     .result-header {
       height: 35px;
+      color: white;
       background-color: $main-bg-color;
       display: flex;
       align-items: center;
-      padding-left: 14px;
+      padding: 0 16px 0 5px;
     }
   }
 }

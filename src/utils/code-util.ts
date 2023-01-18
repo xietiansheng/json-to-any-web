@@ -1,3 +1,5 @@
+import { useCommonStore } from "@/store/common";
+
 /**
  * 属性名，实体名的统一处理
  * @param name
@@ -13,12 +15,12 @@ export const transformName = (
   if (!name) {
     return name;
   }
-  if (name.includes("_")) {
-    name = transformSymbolName(name, "_");
-  }
-  if (name.includes(".")) {
-    name = transformSymbolName(name, ".");
-  }
+  const { jointSymbolValues } = useCommonStore();
+  jointSymbolValues.forEach((item) => {
+    if (name.includes(item)) {
+      name = transformSymbolName(name, item);
+    }
+  });
   return options?.firstChatUpperCase ? firstChatToUpperCase(name) : name;
 };
 const firstChatToUpperCase = (val: string) =>

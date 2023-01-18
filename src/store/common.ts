@@ -1,10 +1,14 @@
 import { defineStore } from "pinia";
-import { codeTypeList } from "@/view/home/code-type";
+import { codeTypeList, jointSymbolList } from "@/config";
 
 export const useCommonStore = defineStore("common", {
   state: () => ({
-    curCodeType: codeTypeList[0] && codeTypeList[0],
+    curCodeType: JSON.parse(JSON.stringify(codeTypeList[0])),
+    resultSetting: {},
+    jointSymbolValues: jointSymbolList.map((item) => item.value),
+    badgeDotVisible: true,
   }),
   getters: {},
   actions: {},
+  persist: true,
 });

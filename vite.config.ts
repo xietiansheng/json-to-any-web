@@ -50,12 +50,12 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: ["vue"],
         resolvers: [ElementPlusResolver()],
+        dts: "src/auto-imports.d.ts",
       }),
       Components({
-        dts: true,
         dirs: ["src/components"],
-        extensions: ["vue"],
         resolvers: [ElementPlusResolver()],
+        dts: "src/components.d.ts",
       }),
     ],
     css: {

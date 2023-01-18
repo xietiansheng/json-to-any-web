@@ -10,14 +10,14 @@
 <script lang="ts" setup>
 import MarkDownEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
-import { computed } from "vue";
 
 const emit = defineEmits(["update:value"]);
-const props = defineProps<{
-  value: {
-    type: string;
-  };
-}>();
+const props = withDefaults(
+  defineProps<{
+    value: string;
+  }>(),
+  {}
+);
 const mdText = computed({
   get() {
     return props.value;
