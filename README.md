@@ -9,49 +9,52 @@
 </p>
 
 
-## 💡 介绍
-
-⚡️JsonToAny是一款前端开发人员的在线代码生成工具，通过开发者给定的 `JSON` / `Object`，自动生成指定的代码，提高团队前期整体开发效率。
-
-
-## ✨ 功能
-
-> 目前支持如下语言转换
-
-* TypeScript（Web前端开发人员）
-* Java（原生Android开发人员）
-* Dart（Flutter开发人员）
+## 🌐 Language
+**[Chinese](README_CN.md) / English**
 
 
-## 📝 使用
+## 💡 Introduction
 
-在线地址：[http://xiets.gitee.io/json-to-any-web/](http://xiets.gitee.io/json-to-any-web/)
-（ [Gitee](https://gitee.com/XieTS/json-to-any-web) /
-[GitHub](https://github.com/xietiansheng/json-to-any-web) ）
+⚡️JsonToAny is an online code generation tool for front-end developers, which automatically generates the specified code through the `JSON` / `Object` given by the developer to improve the overall development efficiency of the team upfront.
 
-当然，你也可以 `Fork` 该项目对代码的生成结果进行定制化开发，自由操控生成结果。
 
-## 🎉 效果
+## ✨ Function
 
-> JSON 转 TypeScript
+> The following language conversions are currently supported
+
+* TypeScript（Web front-end developer）
+* Java（Native Android Developer）
+* Dart（Flutter Developer）
+
+
+## 📝 Use
+
+Online Address：[https://github.com/xietiansheng/json-to-any-web](http://xiets.gitee.io/json-to-any-web/)
+（ [GitHub](https://github.com/xietiansheng/json-to-any-web) / [Gitee](https://gitee.com/XieTS/json-to-any-web) ）
+
+you can also `Fork` the project to customize the code generation results and freely manipulate the generated results.
+
+## 🎉 Effect
+
+> JSON to TypeScript
 
 ![](./src/assets/images/example-ts.png)
 
-> JSON 转 Java
+> JSON to Java
 
 ![](./src/assets/images/example-java.png)
 
-> JSON 转 Dart
+> JSON to Dart
 
 ![](./src/assets/images/example-dart.png)
 
-## 🔨 开发
+## 🔨 Development
 
 ```bash
-# gitee
-git clone https://gitee.com/XieTS/json-to-any-web.git
 # github
 git clone https://github.com/xietiansheng/json-to-any-web.git
+# gitee
+git clone https://gitee.com/XieTS/json-to-any-web.git
 
 # 安装依赖（推荐pnpm）
 npm install
@@ -60,21 +63,21 @@ npm install
 npm run dev
 ```
 
-## 🔧 发布
+## 🔧 Release
 
 ```cmd
 npm run build:prod
 ```
 
-## 🔍️ 其他
+## 🔍️ Other
 
 ```cmd
-# 预览发布环境
+# Preview Release Environment
 npm run preview
 
-# 代码格式检查
+# Code format check
 npm run lint
 
-# 代码格式检查并自动修复
+# Code format check and automatic repair
 npm run lint -- --fix
 ```
