@@ -5,7 +5,7 @@
       <el-row class="overflow-hidden flex flex-1">
         <el-col :xs="24" :span="12">
           <json-editor
-            v-model="jsonCode"
+            v-model:value="jsonCode"
             class="flex-1"
             mode="code"
             @json-change="onJsonChanged"
@@ -17,7 +17,7 @@
               <result-setting />
               <code-type-selector class="pl-10px" />
             </div>
-            <markdown-editor v-model="mdCodeText" />
+            <markdown-editor v-model:value="mdCodeText" />
           </div>
         </el-col>
       </el-row>
@@ -34,7 +34,7 @@ import { codeTypeList } from "@/config";
 
 const { curCodeType, jointSymbolValues } = storeToRefs(useCommonStore());
 
-const jsonCode = ref<string | object>({
+const jsonCode = ref<string | Record<any, any>>({
   title: "JsonToAny 示例JSON (包含所有数据格式)",
   gitee: "https://gitee.com/XieTS/json-to-any-web",
   orgId: 789,
