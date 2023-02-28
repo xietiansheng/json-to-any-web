@@ -3,12 +3,22 @@
     <div class="container mx-auto flex-column rounded-xl my-20px">
       <toolbar />
       <el-row class="overflow-hidden flex flex-1">
-        <el-col :xs="24" :span="12">
+        <el-col :xs="24" :span="12" class="relative">
+          <el-alert
+            v-show="errorText"
+            class="error-alert"
+            :title="errorText"
+            type="error"
+            :closable="false"
+            show-icon
+            center
+          />
           <json-editor
             v-model:value="jsonCode"
             class="flex-1"
             mode="code"
             @json-change="onJsonChanged"
+            @has-error="onJsonError"
           />
         </el-col>
         <el-col :xs="24" :span="12">
@@ -50,7 +60,10 @@ const jsonCode = ref<string | Record<any, any>>({
   strList: [1, 34],
   orderList: [{}, "特殊数据做any处理", true],
 });
-const onJsonChanged = (json: string) => (jsonCode.value = json);
+const onJsonChanged = (json: string) => {
+  jsonCode.value = json;
+  errorText.value = "";
+};
 const mdCodeText = ref<string>("");
 const jsonToCode = (json: string | Record<any, any>) => {
   const codeType = codeTypeList.find(
@@ -59,6 +72,11 @@ const jsonToCode = (json: string | Record<any, any>) => {
   if (codeType) {
     mdCodeText.value = "" + codeType.transform(json);
   }
+};
+
+const errorText = ref("");
+const onJsonError = (error: Error) => {
+  errorText.value = error.message;
 };
 
 watch(
@@ -88,6 +106,16 @@ watch(
       align-items: center;
       padding: 0 16px 0 5px;
     }
+  }
+
+  .error-alert {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+
+  .relative {
+    position: relative;
   }
 }
 </style>
