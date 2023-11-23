@@ -1,77 +1,68 @@
-import { parse, transformCode } from "json-to-any";
-import { CodeTypeTransform } from "@/types/code-type";
-import { transformName } from "@/utils/code-util";
+import { Property, PropertyType } from "json-to-any/dist/type/property";
+import { AllVariableType } from "json-to-any/dist/type/variable-type";
+import { CodeTypeTransform } from "@/types/code-type-item";
+import { formatKey } from "@/utils/code-util";
 
-export const ToJava: CodeTypeTransform = (json) => {
-  const entities = parse(json);
-  // 将所有实体类名统一
+export const ToJava: CodeTypeTransform = (entities) => {
+  // // 将所有实体类名统一
+  let code = "";
   entities.forEach((entity) => {
-    entity.key = transformName(entity.key, { firstChatUpperCase: true });
+    // 处理 get set
+    const getSetCode = entity.properties
+      .map((property) => generatorGetSetCode(property))
+      .join("\n");
+    // 处理属性
+    const propertyCode = entity.properties
+      .map((property) => generatorPropertyCode(property) + ";")
+      .join("\n");
+    code += `public class ${entity.name} {\n${propertyCode}\n\n${getSetCode} \n}\n\n`;
   });
-  const key = transformName;
-  const strToJavaCode = (key: string, value: string) =>
-    `  private ${value} ${transformName(key)};\n`;
-  const type = (type: string) => {
-    const map = {
-      string: "String",
-      number: "double",
-      null: "String",
-    };
-    return map[type as keyof typeof map] || type;
-  };
-  const setGetCode = (_key: string, _type: string): string => {
-    return (
-      `\n  public ${type(_type)} get${key(_key, {
-        firstChatUpperCase: true,
-      })}(){` +
-      `\n    return this.${_key}; \n  }\n` +
-      `\n  public void set${key(_key, {
-        firstChatUpperCase: true,
-      })}(${type(_type)} ${_key}){\n` +
-      `    this.${_key} = ${_key};\n  }\n`
-    );
-  };
-  const codeResult = transformCode(entities, {
-    before({ entity }) {
-      return `public class ${entity.key} {\n`;
-    },
-    default({ property }) {
-      property.key = key(property.key);
-      return [
-        strToJavaCode(property.key, type(property.type)),
-        setGetCode(property.key, property.type),
-      ];
-    },
-    object({ property }) {
-      return [
-        strToJavaCode(
-          property.key,
-          transformName(property.entity.key, {
-            firstChatUpperCase: true,
-          })
-        ),
-        setGetCode(property.key, property.entity.key),
-      ];
-    },
-    array({ property }) {
-      const childProperty = property.childProperty;
-      if (childProperty.type === "object") {
-        return strToJavaCode(
-          property.key,
-          `Array<${(childProperty as any).entity.key}>`
-        );
-      }
-      if (childProperty.type === "null") {
-        return strToJavaCode(property.key, `Array<${type("null")}>`);
-      }
-      return [
-        strToJavaCode(property.key, `Array<${type(childProperty.type)}>`),
-        setGetCode(property.key, `Array<${type(childProperty.type)}>`),
-      ];
-    },
-    after() {
-      return "}\n\n";
-    },
-  });
-  return "```java\n" + codeResult + "\n```";
+  return "```ts\n" + code + "\n```";
 };
+
+function generatorGetSetCode(property: Property) {
+  return (
+    `  public ${getType(property)} get${formatKey(property.key).upKey}` +
+    "() {\n" +
+    `    return this.${property.key};` +
+    "\n  }\n\n" +
+    `  public void set${formatKey(property.key).upKey}` +
+    `(${getType(property)} ${property.key}) {
+` +
+    `    this.${property.key} = ${property.key};` +
+    "\n  }\n"
+  );
+}
+
+function generatorPropertyCode(property: Property) {
+  const { key, type, arrayExtend } = property;
+  const showKey = key;
+  let showType = getType(property);
+  if (type === "object") {
+    showType = property.objectExtend?.reference?.name || "Object";
+  }
+  return `  private ${showType} ${showKey}`;
+}
+
+const getJavaType = (type?: AllVariableType | PropertyType[]) => {
+  const typeJavaMap = {
+    string: "String",
+    number: "double",
+    boolean: "Boolean",
+    object: "Object",
+    array: "Array",
+  };
+  return typeJavaMap[type as keyof typeof typeJavaMap] || "Object";
+};
+
+function getType({ type, arrayExtend }: Property) {
+  const javaType = getJavaType(type);
+  if (type === "array") {
+    const firstChild = arrayExtend?.types[0];
+    if (firstChild?.reference) {
+      return "Array<" + firstChild.reference.name + ">";
+    }
+    return "Array<" + getJavaType(firstChild?.type) + ">";
+  }
+  return javaType;
+}

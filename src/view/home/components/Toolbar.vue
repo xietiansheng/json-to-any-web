@@ -9,7 +9,7 @@
           type="primary"
         >
           <div class="logo-block">
-            <img src="@/assets/images/logo.png" />
+            <img src="../../../assets/images/logo.png" />
           </div>
         </el-link>
         <div class="title">JsonToAny</div>

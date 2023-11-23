@@ -4,16 +4,16 @@
 <template>
   <el-dropdown :hide-on-click="false">
     <div class="el-dropdown-link">
-      {{ commonStore.curCodeType.label
+      {{ commonStore.curCodeType
       }}<el-icon class="el-icon--right"><CaretBottom /></el-icon>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
-          v-for="item in curCodeTypeList"
-          :key="item.value"
-          @click="handleCodeTypeChanged(item)"
-          >{{ item.label }}
+          v-for="key in codeTypeList"
+          :key="key"
+          @click="commonStore.curCodeType = key"
+          >{{ key }}
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -24,14 +24,8 @@
 import { useCommonStore } from "@/store/common";
 import { CaretBottom } from "@element-plus/icons-vue";
 import { codeTypeList } from "@/config";
-import { CodeType } from "@/types/code-type";
 
 const commonStore = useCommonStore();
-const curCodeTypeList = Array.from(codeTypeList);
-
-const handleCodeTypeChanged = (codeType: CodeType) => {
-  commonStore.curCodeType = codeType;
-};
 </script>
 
 <style lang="scss" scoped>

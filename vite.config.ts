@@ -1,19 +1,13 @@
 import { defineConfig, loadEnv, normalizePath } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { resolve, join } from "path";
-import windiCSS from "vite-plugin-windicss";
-import viteEslint from "vite-plugin-eslint";
-import viteImagemin from "vite-plugin-imagemin";
-import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
-import { visualizer } from "rollup-plugin-visualizer";
-import { BeautifyConsolePlugin } from "beautify-console";
+import Vue from "@vitejs/plugin-vue";
+import { resolve } from "path";
+import WindiCSS from "vite-plugin-windicss";
+import ViteEslint from "vite-plugin-eslint";
+import { BeautifyConsole } from "beautify-console";
 
-// element-plus
-import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 
-const variablePath = normalizePath(resolve("./src/styles/variable.scss"));
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   const isDev = mode !== "production";
@@ -24,36 +18,14 @@ export default defineConfig(({ mode }) => {
       __DEV__: isDev,
     },
     plugins: [
-      vue(),
-      windiCSS(),
-      viteEslint(),
-      viteImagemin({
-        optipng: { optimizationLevel: 7 },
-        pngquant: { quality: [0.8, 0.9] },
-        svgo: {
-          plugins: [
-            { name: "removeViewBox" },
-            { name: "removeEmptyAttrs", active: false },
-          ],
-        },
-      }),
-      createSvgIconsPlugin({
-        iconDirs: [join(__dirname, "src/assets/icons")],
-      }),
-      visualizer({
-        open: true,
-      }),
-      BeautifyConsolePlugin({
+      Vue(),
+      WindiCSS(),
+      ViteEslint(),
+      BeautifyConsole({
         title: "JsonToAny",
         info: "Log",
       }),
-      AutoImport({
-        imports: ["vue"],
-        resolvers: [ElementPlusResolver()],
-        dts: "src/auto-imports.d.ts",
-      }),
       Components({
-        dirs: ["src/components"],
         resolvers: [ElementPlusResolver()],
         dts: "src/components.d.ts",
       }),
@@ -61,7 +33,7 @@ export default defineConfig(({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "${variablePath}";`,
+          additionalData: `@import "@/styles/variable.scss";`,
         },
       },
     },
@@ -71,20 +43,8 @@ export default defineConfig(({ mode }) => {
         "@assets": resolve(__dirname, "src/assets"),
       },
     },
-    optimizeDeps: {
-      exclude: ["vue"],
-    },
-    build: {
-      minify: "esbuild",
-      target: "es2015",
-      sourcemap: isDev,
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vue: ["vue"],
-          },
-        },
-      },
+    server: {
+      port: 5000,
     },
   };
 });

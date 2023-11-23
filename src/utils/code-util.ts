@@ -1,51 +1,36 @@
-import { useCommonStore } from "@/store/common";
-
-/**
- * 属性名，实体名的统一处理
- * @param name
- * @param options
- * @param options.firstChatUpperCase 首字母是否需要大写
- */
-export const transformName = (
-  name: string,
-  options?: {
-    firstChatUpperCase: boolean;
-  }
-): string => {
-  if (!name) {
-    return name;
-  }
-  const { jointSymbolValues } = useCommonStore();
-  jointSymbolValues.forEach((item) => {
-    if (name.includes(item)) {
-      name = transformSymbolName(name, item);
-    }
-  });
-  return options?.firstChatUpperCase ? firstChatToUpperCase(name) : name;
-};
 const firstChatToUpperCase = (val: string) =>
   (val && val[0].toUpperCase() + val.slice(1, val.length)) || "";
-/**
- *  特殊拼接符号处理
- *  order_id ==> orderId
- */
-const transformSymbolName = (name: string, symbolStr: string) => {
-  return name.split(symbolStr).reduce((pre, item, index) => {
-    let res = item;
-    if (index !== 0) {
-      res = firstChatToUpperCase(item);
-    }
-    return pre + res;
-  }, "");
-};
 
 export const formatKey = (
   key: string
 ): { upKey: string; lowKey: string; originKey: string } => {
-  const _key = transformName(key);
   return {
-    upKey: firstChatToUpperCase(_key),
-    lowKey: _key,
+    upKey: firstChatToUpperCase(key),
+    lowKey: key,
     originKey: key,
   };
 };
+
+export function getCodeResult(name: string, code: string) {
+  code = code.replaceAll("'", '"');
+  const funCode = `
+      function toUpper(str) {
+        if (!str) return str;
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      } 
+      function toHump(name, separators) {
+        if (!Array.isArray(separators)) {
+          separators = [separators];
+        }
+        let regexString = separators.map((sep) => sep.replace(/[-\\/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&')).join('|');
+        let regex = new RegExp(\`(\${regexString})(\\\\w)\`, 'g');
+        return name.replace(regex, function (match, separator, letter) {
+          return letter.toUpperCase();
+        });
+      }
+      const funNameArr = ["toUpper", "toHump"];
+      const funArr = [toUpper, toHump];
+      return new Function("name",...funNameArr, "return " + '${code}')('${name}',...funArr)
+      `;
+  return new Function("name", funCode)(name);
+}

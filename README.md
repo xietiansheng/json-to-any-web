@@ -53,13 +53,14 @@ you can also `Fork` the project to customize the code generation results and fre
 ```bash
 # github
 git clone https://github.com/xietiansheng/json-to-any-web.git
+
 # gitee
 git clone https://gitee.com/XieTS/json-to-any-web.git
 
-# 安装依赖（推荐pnpm）
-npm install
+# Install dependencies（recommend pnpm）
+pnpm install
 
-# 启动服务
+# Development
 npm run dev
 ```
 

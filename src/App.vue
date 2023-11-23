@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import Home from "@/view/home.vue";
+import Home from "@/view/home/home.vue";
 </script>
 
 <style scoped lang="scss">
