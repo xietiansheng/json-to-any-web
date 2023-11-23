@@ -9,10 +9,21 @@ import { getCodeResult } from "@/utils/code-util";
 import { useCommonStore } from "@/store/common";
 import { storeToRefs } from "pinia";
 
-const props = defineProps<{
-  value: string;
-  type: "entity" | "property";
-}>();
+const props = withDefaults(
+  defineProps<{
+    value: string;
+    type: "entity" | "property";
+    sourceJson?: string | Record<any, any>;
+  }>(),
+  {
+    value: "",
+    type: "entity",
+    sourceJson: () => ({
+      first_name: "Mario",
+      last_name: "Xie",
+    }),
+  }
+);
 
 const curValue = ref(props.value);
 watch(
@@ -53,10 +64,7 @@ watch(
   }
 );
 function reset() {
-  entities = parse({
-    first_name: "Mario",
-    last_name: "Xie",
-  });
+  entities = parse(props.sourceJson);
   oldResult.value = generatorCode(curCodeType.value, entities);
 }
 

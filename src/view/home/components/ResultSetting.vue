@@ -17,6 +17,7 @@
         <code-editor
           ref="entityNameCodeRef"
           :value="entityNameCode"
+          :source-json="{}"
           type="entity"
         />
       </el-tab-pane>
@@ -32,16 +33,39 @@
       </el-tab-pane>
     </el-tabs>
     <template #footer>
-      <span class="dialog-footer">
-        <el-link
-          target="_blank"
-          :underline="false"
-          type="primary"
-          class="pr-10px inline-block"
-          href="https://github.com/xietiansheng/json-to-any-web/issues"
-        >
-          <span class="pr-18px">（需求/bug反馈）</span>
-        </el-link>
+      <span class="flex items-center justify-end">
+        <el-dropdown>
+          <div class="">
+            <el-link type="primary" :underline="false"
+              >（需求/bug反馈）</el-link
+            >
+            <el-icon class="el-icon--right"><arrow-down /> </el-icon>
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                ><el-link
+                  target="_blank"
+                  :underline="false"
+                  class="pr-10px inline-block"
+                  href="https://gitee.com/XieTS/json-to-any-web/issues"
+                >
+                  <span class="pr-18px">gitee</span>
+                </el-link></el-dropdown-item
+              >
+              <el-dropdown-item
+                ><el-link
+                  target="_blank"
+                  :underline="false"
+                  class="pr-10px inline-block"
+                  href="https://github.com/xietiansheng/json-to-any-web/issues"
+                >
+                  <span class="pr-18px">github</span>
+                </el-link></el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
         <el-button class="info" @click="onResetCode">恢复到默认</el-button>
         <el-button type="primary" @click="onConfirmClick">确认</el-button>
       </span>

@@ -7,9 +7,9 @@ export const ToTypescript: CodeTypeTransform = (entities) => {
   let code = "";
   entities.forEach((entity) => {
     const propertyCode = entity.properties
-      .map((property) => generatorPropertyCode(property) + ";")
-      .join("\n");
-    code += `export interface ${entity.name} {\n${propertyCode} \n}\n`;
+      .map((property) => "\n" + generatorPropertyCode(property) + ";")
+      .join("");
+    code += `export interface ${entity.name} {${propertyCode} \n}\n\n`;
   });
   return "```ts\n" + code + "\n```";
 };
