@@ -15,9 +15,9 @@ export const ToJsClass: CodeTypeTransform = (entities) => {
   // // 将所有实体类名统一
   let code = "";
   entities.forEach((entity) => {
-    const propertyCode = entity.properties.map(
-      (property) => generatorPropertyCode(property) + ";"
-    );
+    const propertyCode = entity.properties
+      .map((property) => generatorPropertyCode(property))
+      .join("");
     code += `\nclass ${entity.name} {${propertyCode} \n}\n`;
   });
   return "```ts\n" + code + "\n```";
@@ -36,5 +36,5 @@ function generatorPropertyCode(property: Property) {
   const defValue =
     typeToDefValueMap[curType as keyof typeof typeToDefValueMap] || "undefined";
 
-  return "\n  " + key + connector + defValue;
+  return "\n  " + key + connector + defValue + ";";
 }
