@@ -2,7 +2,7 @@
 @author: xietiansheng
 -->
 <template>
-  <el-badge :is-dot="badgeDotVisible" class="item">
+  <el-badge :is-dot="badgeDotVisible !== BadgeVersion" class="item">
     <el-icon
       class="el-icon--right cursor-pointer"
       style="position: relative; top: 2px; right: 2px"
@@ -56,7 +56,11 @@ import { useCommonStore } from "@/store/common";
 import CodeDoc from "@/view/home/components/CodeDoc.vue";
 import CodeEditor from "@/view/home/components/CodeEditor.vue";
 import { ElMessage } from "element-plus";
-import { defaultEntityNameCode, defaultPropertyNameCode } from "@/config";
+import {
+  BadgeVersion,
+  defaultEntityNameCode,
+  defaultPropertyNameCode,
+} from "@/config";
 import { storeToRefs } from "pinia";
 
 const commonStore = useCommonStore();
@@ -65,7 +69,7 @@ const { badgeDotVisible, entityNameCode, propertyNameCode } =
 
 const dialogFormVisible = ref(false);
 function handleIconClick() {
-  badgeDotVisible.value = false;
+  badgeDotVisible.value = BadgeVersion;
   dialogFormVisible.value = true;
 }
 

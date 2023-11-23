@@ -9,13 +9,13 @@ export const useCommonStore = defineStore("common", {
   state: (): {
     curCodeType: CodeType;
     resultSetting: Record<string, string>;
-    badgeDotVisible: boolean;
+    badgeDotVisible: string;
     entityNameCode: string;
     propertyNameCode: string;
   } => ({
     curCodeType: "Typescript",
     resultSetting: {},
-    badgeDotVisible: true,
+    badgeDotVisible: "1",
     entityNameCode: defaultEntityNameCode,
     propertyNameCode: defaultPropertyNameCode,
   }),
