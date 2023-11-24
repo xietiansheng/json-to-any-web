@@ -1,5 +1,9 @@
 <template>
-  <Vue3JsonEditor v-model="curValue" v-bind="$attrs" />
+  <Vue3JsonEditor
+    v-model="curValue"
+    class="h-full overflow-hidden"
+    v-bind="$attrs"
+  />
 </template>
 <script lang="ts" setup>
 import { Vue3JsonEditor } from "vue3-json-editor";
@@ -22,6 +26,8 @@ const curValue = computed({
 
 <style lang="scss" scoped>
 :deep(.jsoneditor-vue) {
+  height: 100%;
+
   .jsoneditor-contextmenu ul li button {
     color: white;
   }
@@ -44,7 +50,7 @@ const curValue = computed({
   .jsoneditor-outer {
     margin: 0;
     padding: 0;
-    height: $code-wrapper-height;
+    height: 100%;
   }
 
   .jsoneditor-poweredBy {

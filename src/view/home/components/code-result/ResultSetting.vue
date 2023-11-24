@@ -77,7 +77,7 @@
 import { ref } from "vue";
 import { Setting } from "@element-plus/icons-vue";
 import { useCommonStore } from "@/store/common";
-import CodeDoc from "@/view/home/components/CodeDoc.vue";
+import CodeDoc from "@/view/home/components/code-result/CodeDoc.vue";
 import CodeEditor from "@/view/home/components/CodeEditor.vue";
 import { ElMessage } from "element-plus";
 import {
