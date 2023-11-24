@@ -3,7 +3,7 @@
     <el-col :span="24" class="flex items-center">
       <div class="flex items-center">
         <el-link
-          href="https://www.npmjs.com/package/json-to-any"
+          href="https://gitee.com/XieTS/json-to-any-web"
           target="_blank"
           :underline="false"
           type="primary"
