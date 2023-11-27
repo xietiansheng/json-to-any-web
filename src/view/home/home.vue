@@ -31,7 +31,7 @@
               class="filter-input"
               type="textarea"
               clearable
-              :autosize="{ minRows: 2, maxRows: 3 }"
+              :autosize="{ minRows: 1, maxRows: 3 }"
               placeholder="代码过滤，例：data.map((item)=>item.name)"
               @click="onFilterCodeInputClick()"
             />

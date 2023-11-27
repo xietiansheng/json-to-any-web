@@ -20,7 +20,7 @@ export const ToJsClass: CodeTypeTransform = (entities) => {
       .join("");
     code += `\nclass ${entity.name} {${propertyCode} \n}\n`;
   });
-  return "```ts\n" + code + "\n```";
+  return "```javascript\n" + code + "\n```";
 };
 
 function generatorPropertyCode(property: Property) {
