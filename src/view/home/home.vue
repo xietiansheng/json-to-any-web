@@ -15,48 +15,53 @@
         center
       />
       <Toolbar />
-      <el-row class="overflow-hidden flex flex-1">
-        <ElCol :xs="24" :span="12" class="h-full flex flex-col">
-          <div class="flex-1">
-            <JsonEditor
-              v-model:value="jsonCode"
-              mode="code"
-              @json-change="onJsonChanged"
-              @has-error="onJsonError"
-            />
-          </div>
-          <div class="max-h-200px flex flex-col">
-            <ElInput
-              v-model="filterCodeInputVal"
-              class="filter-input"
-              type="textarea"
-              clearable
-              :autosize="{ minRows: 1, maxRows: 3 }"
-              placeholder="代码过滤，例：data.map((item)=>item.name)"
-              @click="onFilterCodeInputClick()"
-            />
-            <div class="flex-1 h-100px relative">
-              <div
-                class="flex-center py-4px text-14px cursor-pointer gap-4px text-white"
-                style="position: absolute; top: 20px; right: 20px"
-                @click="closeFilterResult()"
-              >
-                收起<el-icon
-                  ><DArrowRight style="transform: rotate(90deg)"
-                /></el-icon>
+      <el-row class="overflow-hidden flex-1">
+        <ElCol :xs="12" :span="12" class="h-full">
+          <div class="flex flex-col h-full overflow-hidden">
+            <div class="flex-1 overflow-auto">
+              <JsonEditor
+                v-model:value="jsonCode"
+                mode="code"
+                @json-change="onJsonChanged"
+                @has-error="onJsonError"
+              />
+            </div>
+            <div class="max-h-200px flex flex-col">
+              <ElInput
+                v-model="filterCodeInputVal"
+                class="filter-input"
+                type="textarea"
+                clearable
+                :autosize="{ minRows: 1, maxRows: 3 }"
+                placeholder="代码过滤，例：data.map((item)=>item.name)"
+                @click="onFilterCodeInputClick()"
+              />
+              <div class="flex-1 h-100px relative">
+                <div
+                  class="flex-center py-4px text-14px cursor-pointer gap-4px text-white"
+                  style="position: absolute; top: 20px; right: 20px"
+                  @click="closeFilterResult()"
+                >
+                  收起<el-icon
+                    ><DArrowRight style="transform: rotate(90deg)"
+                  /></el-icon>
+                </div>
+                <Transition name="slide-fade">
+                  <MarkdownPreview
+                    v-show="showFilterResult"
+                    :value="fullFilterCode"
+                    class="h-full"
+                    style="
+                      border-right: 1px solid #f5f5f5;
+                      transition: all 0.3s;
+                    "
+                  />
+                </Transition>
               </div>
-              <Transition name="slide-fade">
-                <MarkdownPreview
-                  v-show="showFilterResult"
-                  :value="fullFilterCode"
-                  class="h-full"
-                  style="border-right: 1px solid #f5f5f5; transition: all 0.3s"
-                />
-              </Transition>
             </div>
           </div>
         </ElCol>
-        <ElCol :xs="24" :span="12" class="h-full overflow-hidden relative">
+        <ElCol :xs="12" :span="12" class="overflow-hidden relative">
           <CodeResult :code-text="mdCodeText" />
           <Transition name="slide-fade">
             <CodeFilterResult
@@ -168,7 +173,7 @@ const filterCode = computed(() => {
     if (typeof result === "object") {
       result = JSON.stringify(result, null, 2);
     }
-    return "```json" + `\n${result || ""}` + "\n```";
+    return "```json" + `\n${result || "// undefined"}` + "\n```";
   } catch (e: any) {
     return (
       "\n<p style='padding: 10px;font-size: 16px;color:#f0f2f5'>🚨：" +

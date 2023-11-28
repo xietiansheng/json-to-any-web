@@ -3,9 +3,11 @@
 -->
 <template>
   <el-dropdown :hide-on-click="false">
-    <div class="el-dropdown-link">
-      {{ commonStore.curCodeType
-      }}<el-icon class="el-icon--right"><CaretBottom /></el-icon>
+    <div class="text-md cursor-pointer flex-center text-white">
+      {{ commonStore.curCodeType }}
+      <el-icon class="el-icon--right">
+        <CaretBottom />
+      </el-icon>
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -28,13 +30,4 @@ import { codeTypeList } from "@/config";
 const commonStore = useCommonStore();
 </script>
 
-<style lang="scss" scoped>
-.el-dropdown-link {
-  color: #f5f5f5;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
+<style lang="scss" scoped></style>

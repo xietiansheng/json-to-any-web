@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv, normalizePath } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import Vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 import WindiCSS from "vite-plugin-windicss";
@@ -30,21 +30,12 @@ export default defineConfig(({ mode }) => {
         dts: "src/components.d.ts",
       }),
     ],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "@/styles/variable.scss";`,
-        },
-      },
-    },
     resolve: {
       alias: {
         "@": resolve(__dirname, "src"),
         "@assets": resolve(__dirname, "src/assets"),
       },
     },
-    server: {
-      port: 5000,
-    },
+    server: { port: 5000 },
   };
 });

@@ -37,7 +37,7 @@ const curValue = computed({
   }
 
   .jsoneditor-menu {
-    background-color: $main-bg-color;
+    background-color: var(--primary-bg-color);
     border-bottom: none;
   }
 

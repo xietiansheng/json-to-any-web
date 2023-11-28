@@ -8,6 +8,7 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import persistedState from "pinia-plugin-persistedstate";
 // element-plus
 import "element-plus/dist/index.css";
+import "@/styles/index.scss";
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

@@ -1,10 +1,13 @@
 import { defineConfig } from "vite-plugin-windicss";
-// import colors from 'windicss/colors'
 
 export default defineConfig({
   darkMode: "class",
   theme: {
     extend: {
+      colors: {
+        primary: "var(--primary-color)",
+        dark: "var(--primary-bg-color)",
+      },
       screens: {
         sm: "640px",
         md: "768px",
@@ -12,20 +15,37 @@ export default defineConfig({
         xl: "1280px",
         "2xl": "1536px",
       },
-      // 在这里自定义你的调色板
-      colors: {
-        main: {
-          "50": "#eff6ff",
-          "100": "#dbeafe",
-          "200": "#bfdbfe",
-          "300": "#93c5fd",
-          "400": "#60a5fa",
-          "500": "#3b82f6",
-          "600": "#2563eb",
-          "700": "#1d4ed8",
-          "800": "#1e40af",
-          "900": "#1e3a8a",
-        },
+      fontSize: {
+        base: "20px",
+        xs: "12px ",
+        sm: "12px",
+        md: "14px",
+        lg: "16px",
+        xl: "18px",
+        xxl: "20px",
+      },
+      sizes: {
+        xs: "10px",
+        sm: "12px",
+        md: "14px",
+        lg: "16px",
+        xl: "18px",
+        xxl: "20px",
+      },
+      borderRadius: {
+        xs: "4px",
+        sm: "6px",
+        md: "8px",
+        lg: "10px",
+        xl: "12px",
+      },
+      spacing: {
+        xs: "4px",
+        sm: "8px",
+        md: "12px",
+        lg: "16px",
+        xl: "20px",
+        xxl: "36px",
       },
       textColor: {
         main: "#409eff",
@@ -36,6 +56,5 @@ export default defineConfig({
   },
   shortcuts: {
     "flex-center": "flex justify-center items-center",
-    "text-title": "text-stone-500",
   },
 });

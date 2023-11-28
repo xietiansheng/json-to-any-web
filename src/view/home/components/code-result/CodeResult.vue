@@ -15,17 +15,10 @@ const { codeText } = toRefs(props);
 
 <template>
   <div class="flex flex-col flex-1 h-full">
-    <div class="result-header h-35px min-h-35px text-white flex items-center">
+    <div class="bg-dark pl-sm h-35px min-h-35px text-white flex items-center">
       <ResultSetting />
       <CodeTypeSelector class="pl-10px" />
     </div>
     <MarkdownPreview :value="codeText" class="flex-1 h-full" />
   </div>
 </template>
-
-<style scoped lang="scss">
-.result-header {
-  background-color: $main-bg-color;
-  padding: 0 16px 0 5px;
-}
-</style>

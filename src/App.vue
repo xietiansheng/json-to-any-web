@@ -1,6 +1,6 @@
 <template>
-  <div class="relative">
-    <home />
+  <div class="h-full">
+    <Home />
   </div>
 </template>
 
@@ -19,8 +19,4 @@ function init() {
 init();
 </script>
 
-<style scoped lang="scss">
-.relative {
-  height: 100%;
-}
-</style>
+<style scoped lang="scss"></style>
