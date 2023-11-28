@@ -30,4 +30,4 @@ export function generatorCode(codeType: CodeType, entities: Entity[]) {
 }
 
 // 确保每次更新都能显示红点
-export const BadgeVersion = "2";
+export const BadgeVersion = "3";
