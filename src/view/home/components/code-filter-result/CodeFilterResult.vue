@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toRefs } from "vue";
+import MarkdownPreview from "@/components/markdown-preview/MarkdownPreview.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -15,7 +16,7 @@ const { codeText } = toRefs(props);
     <div class="bg-dark pl-sm h-35px min-h-35px text-white flex items-center">
       代码运行结果
     </div>
-    <MarkdownPreview :value="codeText" class="flex-1" />
+    <markdown-preview :value="codeText" class="flex-1" />
   </div>
 </template>
 

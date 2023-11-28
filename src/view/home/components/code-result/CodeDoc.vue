@@ -16,7 +16,7 @@ const fastCodeInputVal = ref("'X' + toUpper(name)");
       开头
     </div>
     <div>我们可以通过下面的代码来实现上面的需求：</div>
-    <CodeEditor v-model:value="codeInputVal" type="entity" :source-json="{}" />
+    <code-editor v-model:value="codeInputVal" type="entity" :source-json="{}" />
     <div>
       细心的朋友可能发现 function setName(name, toUpper, toHump)
       还有两个自带参数，这两个参数为系统内置方法
@@ -28,7 +28,7 @@ const fastCodeInputVal = ref("'X' + toUpper(name)");
       "_")：将给定的字符串，去除指定的分隔符(第二个参数)，并使用驼峰拼接
     </div>
     <div>我们可以通过内置的 toUpper 方法，实现同样的效果：</div>
-    <CodeEditor
+    <code-editor
       v-model:value="fastCodeInputVal"
       type="entity"
       :source-json="{}"

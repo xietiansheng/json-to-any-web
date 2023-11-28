@@ -16,9 +16,9 @@ const { codeText } = toRefs(props);
 <template>
   <div class="flex flex-col flex-1 h-full">
     <div class="bg-dark pl-sm h-35px min-h-35px text-white flex items-center">
-      <ResultSetting />
-      <CodeTypeSelector class="pl-10px" />
+      <result-setting />
+      <code-type-selector class="pl-10px" />
     </div>
-    <MarkdownPreview :value="codeText" class="flex-1 h-full" />
+    <markdown-preview :value="codeText" class="flex-1 h-full" />
   </div>
 </template>

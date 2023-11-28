@@ -6,7 +6,7 @@
       class="container relative overflow-hidden mx-auto flex flex-col rounded-xl"
       style="height: calc(100vh - 40px)"
     >
-      <ElAlert
+      <el-alert
         v-show="errorText"
         :title="errorText"
         type="error"
@@ -14,12 +14,12 @@
         class="error-alert"
         center
       />
-      <Toolbar />
+      <toolbar />
       <el-row class="overflow-hidden flex-1">
-        <ElCol :xs="12" :span="12" class="h-full">
+        <el-col :xs="12" :span="12" class="h-full">
           <div class="flex flex-col h-full overflow-hidden">
             <div class="flex-1 overflow-auto">
-              <JsonEditor
+              <json-editor
                 v-model:value="jsonCode"
                 mode="code"
                 @json-change="onJsonChanged"
@@ -27,7 +27,7 @@
               />
             </div>
             <div class="max-h-200px flex flex-col">
-              <ElInput
+              <el-input
                 v-model="filterCodeInputVal"
                 class="filter-input"
                 type="textarea"
@@ -43,11 +43,11 @@
                   @click="closeFilterResult()"
                 >
                   收起<el-icon
-                    ><DArrowRight style="transform: rotate(90deg)"
+                    ><d-arrow-right style="transform: rotate(90deg)"
                   /></el-icon>
                 </div>
-                <Transition name="slide-fade">
-                  <MarkdownPreview
+                <transition name="slide-fade">
+                  <markdown-preview
                     v-show="showFilterResult"
                     :value="fullFilterCode"
                     class="h-full"
@@ -56,15 +56,15 @@
                       transition: all 0.3s;
                     "
                   />
-                </Transition>
+                </transition>
               </div>
             </div>
           </div>
-        </ElCol>
-        <ElCol :xs="12" :span="12" class="overflow-hidden relative">
-          <CodeResult :code-text="mdCodeText" />
-          <Transition name="slide-fade">
-            <CodeFilterResult
+        </el-col>
+        <el-col :xs="12" :span="12" class="h-full relative">
+          <code-result :code-text="mdCodeText" />
+          <transition name="slide-fade">
+            <code-filter-result
               v-show="showFilterResult"
               :code-text="filterCode"
               :json-code="jsonCode"
@@ -79,10 +79,10 @@
                 transition: all 0.3s;
               "
             />
-          </Transition>
-        </ElCol>
+          </transition>
+        </el-col>
       </el-row>
-      <GithubLogo />
+      <github-logo />
     </div>
   </div>
 </template>
@@ -100,6 +100,7 @@ import { generatorCode } from "@/config";
 import CodeResult from "@/view/home/components/code-result/CodeResult.vue";
 import CodeFilterResult from "@/view/home/components/code-filter-result/CodeFilterResult.vue";
 import { DArrowRight } from "@element-plus/icons-vue";
+import MarkdownPreview from "@/components/markdown-preview/MarkdownPreview.vue";
 
 const commonStore = useCommonStore();
 const { curCodeType, entityNameCode, propertyNameCode } =
@@ -116,9 +117,6 @@ const jsonCode = ref<string | AnyObject>({
     parent: {
       desc: "支持多层级对象嵌套",
     },
-  },
-  parent: {
-    desc: "实体名称相同，所有属性名称相同，自动合并",
   },
   data: [{ content: "不同对象" }, { memo: "自动合并" }],
   strList: [1, "34", true],

@@ -7,7 +7,7 @@
       class="el-icon--right cursor-pointer"
       style="position: relative; top: 2px; right: 2px"
       @click="handleIconClick"
-      ><Setting
+      ><setting
     /></el-icon>
   </el-badge>
 
@@ -29,13 +29,16 @@
         />
       </el-tab-pane>
       <el-tab-pane label="使用文档">
-        <CodeDoc />
+        <code-doc />
+      </el-tab-pane>
+      <el-tab-pane label="关于项目">
+        <about-project />
       </el-tab-pane>
     </el-tabs>
     <template #footer>
       <span class="flex items-center justify-end">
         <el-dropdown>
-          <div class="">
+          <div>
             <el-link type="primary" :underline="false"
               >（需求/bug反馈）</el-link
             >
@@ -86,6 +89,7 @@ import {
   defaultPropertyNameCode,
 } from "@/config";
 import { storeToRefs } from "pinia";
+import AboutProject from "@/view/home/components/code-result/AboutProject.vue";
 
 const commonStore = useCommonStore();
 const { badgeDotVisible, entityNameCode, propertyNameCode } =

@@ -6,7 +6,7 @@
     <div class="text-md cursor-pointer flex-center text-white">
       {{ commonStore.curCodeType }}
       <el-icon class="el-icon--right">
-        <CaretBottom />
+        <caret-bottom />
       </el-icon>
     </div>
     <template #dropdown>

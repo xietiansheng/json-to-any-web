@@ -123,23 +123,23 @@ defineExpose({
     <el-input v-model="curValue" type="textarea" />
     <div>
       <div>实际执行代码</div>
-      <ElAlert
+      <el-alert
         v-if="errMessage"
         :description="`代码运行错误：${errMessage}`"
         :closable="false"
         type="error"
         class="mb-10px"
       />
-      <MarkdownPreview :value="fullCode" class="rounded-6px overflow-hidden" />
+      <markdown-preview :value="fullCode" class="rounded-6px overflow-hidden" />
     </div>
     <div class="flex gap-10px">
       <div class="flex-1 overflow-auto">
         <div>原始结果</div>
-        <MarkdownPreview :value="oldResult" class="rounded-6px" />
+        <markdown-preview :value="oldResult" class="rounded-6px" />
       </div>
       <div class="flex-1 overflow-auto">
         <div>运行结果</div>
-        <MarkdownPreview :value="codeResult" class="rounded-6px" />
+        <markdown-preview :value="codeResult" class="rounded-6px" />
       </div>
     </div>
   </div>
