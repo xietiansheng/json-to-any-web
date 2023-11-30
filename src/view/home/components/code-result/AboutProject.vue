@@ -29,6 +29,7 @@
         >gitee</el-link
       >），Star 便是项目持续 优化 的能量 ~~~
     </p>
+    <p>项目bug / 需求反馈 可通过 github / gitee 提交 Issues</p>
   </div>
 </template>
 

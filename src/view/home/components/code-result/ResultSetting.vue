@@ -1,83 +1,9 @@
 <!--
 @author: xietiansheng
 -->
-<template>
-  <el-badge :is-dot="badgeDotVisible !== BadgeVersion" class="item">
-    <el-icon
-      class="el-icon--right cursor-pointer"
-      style="position: relative; top: 2px; right: 2px"
-      @click="handleIconClick"
-      ><setting
-    /></el-icon>
-  </el-badge>
-
-  <el-dialog v-model="dialogFormVisible" title="规则配置" width="800">
-    <el-tabs type="card">
-      <el-tab-pane label="实体名称规则">
-        <code-editor
-          ref="entityNameCodeRef"
-          :value="entityNameCode"
-          :source-json="{}"
-          type="entity"
-        />
-      </el-tab-pane>
-      <el-tab-pane label="属性名称规则">
-        <code-editor
-          ref="propertyNameCodeRef"
-          :value="propertyNameCode"
-          type="property"
-        />
-      </el-tab-pane>
-      <el-tab-pane label="使用文档">
-        <code-doc />
-      </el-tab-pane>
-      <el-tab-pane label="关于项目">
-        <about-project />
-      </el-tab-pane>
-    </el-tabs>
-    <template #footer>
-      <span class="flex items-center justify-end">
-        <el-dropdown>
-          <div>
-            <el-link type="primary" :underline="false"
-              >（需求/bug反馈）</el-link
-            >
-            <el-icon class="el-icon--right"><arrow-down /> </el-icon>
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                ><el-link
-                  target="_blank"
-                  :underline="false"
-                  class="pr-10px inline-block"
-                  href="https://gitee.com/XieTS/json-to-any-web/issues"
-                >
-                  <span class="pr-18px">gitee</span>
-                </el-link></el-dropdown-item
-              >
-              <el-dropdown-item
-                ><el-link
-                  target="_blank"
-                  :underline="false"
-                  class="pr-10px inline-block"
-                  href="https://github.com/xietiansheng/json-to-any-web/issues"
-                >
-                  <span class="pr-18px">github</span>
-                </el-link></el-dropdown-item
-              >
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <el-button class="info" @click="onResetCode">恢复到默认</el-button>
-        <el-button type="primary" @click="onConfirmClick">确认</el-button>
-      </span>
-    </template>
-  </el-dialog>
-</template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { Setting } from "@element-plus/icons-vue";
 import { useCommonStore } from "@/store/common";
 import CodeDoc from "@/view/home/components/code-result/CodeDoc.vue";
@@ -96,6 +22,7 @@ const { badgeDotVisible, entityNameCode, propertyNameCode } =
   storeToRefs(commonStore);
 
 const dialogFormVisible = ref(false);
+
 function handleIconClick() {
   badgeDotVisible.value = BadgeVersion;
   dialogFormVisible.value = true;
@@ -103,6 +30,12 @@ function handleIconClick() {
 
 const entityNameCodeRef = ref<any>();
 const propertyNameCodeRef = ref<any>();
+
+/** ---------------> tabs与按钮相关 <------------------ **/
+const curTab = ref("1");
+const resetBtnVisible = computed(() => {
+  return ["1", "2"].includes(curTab.value);
+});
 
 /** ---------------> 确定、保存配置 <------------------ **/
 function onConfirmClick() {
@@ -131,10 +64,57 @@ function onResetCode() {
 }
 </script>
 
+<template>
+  <el-badge :is-dot="badgeDotVisible !== BadgeVersion" class="item">
+    <el-icon
+      class="el-icon--right cursor-pointer"
+      style="position: relative; top: 2px; right: 2px"
+      @click="handleIconClick"
+    >
+      <setting />
+    </el-icon>
+  </el-badge>
+
+  <el-dialog v-model="dialogFormVisible" title="规则配置" width="800">
+    <el-tabs v-model="curTab" type="card">
+      <el-tab-pane label="实体名称规则" name="1">
+        <code-editor
+          ref="entityNameCodeRef"
+          :value="entityNameCode"
+          :source-json="{}"
+          type="entity"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="属性名称规则" name="2">
+        <code-editor
+          ref="propertyNameCodeRef"
+          :value="propertyNameCode"
+          type="property"
+        />
+      </el-tab-pane>
+      <el-tab-pane label="使用文档" name="3">
+        <code-doc />
+      </el-tab-pane>
+      <el-tab-pane label="关于项目" name="4">
+        <about-project />
+      </el-tab-pane>
+    </el-tabs>
+    <template #footer>
+      <div class="flex items-center justify-end">
+        <el-button v-show="resetBtnVisible" class="info" @click="onResetCode"
+          >恢复到默认</el-button
+        >
+        <el-button type="primary" @click="onConfirmClick">确认</el-button>
+      </div>
+    </template>
+  </el-dialog>
+</template>
+
 <style lang="scss" scoped>
 :deep(.el-tabs__header) {
   margin: 0;
 }
+
 :deep(.el-tab-pane) {
   padding: 10px;
   border: 1px solid #e5e7eb;

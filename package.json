@@ -22,6 +22,7 @@
     "pinia": "^2.0.24",
     "pinia-plugin-persistedstate": "^2.4.0",
     "vue": "^3.2.41",
+    "vue-clipboard3": "^2.0.0",
     "vue3-json-editor": "^1.1.5"
   },
   "devDependencies": {

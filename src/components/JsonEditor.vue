@@ -50,7 +50,9 @@ const curValue = computed({
   .jsoneditor-outer {
     margin: 0;
     padding: 0;
-    height: 100%;
+    position: absolute;
+    bottom: 0;
+    top: 35px;
   }
 
   .jsoneditor-poweredBy {

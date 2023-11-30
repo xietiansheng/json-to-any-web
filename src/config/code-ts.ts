@@ -11,7 +11,7 @@ export const ToTypescript: CodeTypeTransform = (entities) => {
       .join("");
     code += `export interface ${entity.name} {${propertyCode} \n}\n\n`;
   });
-  return "```ts\n" + code + "\n```";
+  return "```typescript\n" + code + "\n```";
 };
 
 function generatorPropertyCode(property: Property) {
@@ -29,7 +29,7 @@ function generatorPropertyCode(property: Property) {
   }
   // null 类型默认为 any | null
   if (typeStr === "null") {
-    typeStr = "any | null";
+    typeStr = "any";
   }
   return "  " + key + connector + typeStr;
 }

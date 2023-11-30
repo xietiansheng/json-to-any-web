@@ -1,7 +1,6 @@
 import { Property, PropertyType } from "json-to-any/dist/type/property";
 import { AllVariableType } from "json-to-any/dist/type/variable-type";
 import { CodeTypeTransform } from "@/types/code-type-item";
-import { formatKey } from "@/utils/code-util";
 
 export const ToDart: CodeTypeTransform = (entities) => {
   // // 将所有实体类名统一
@@ -23,7 +22,7 @@ export const ToDart: CodeTypeTransform = (entities) => {
       `  ${entity.name}.fromJson(Map<String, dynamic> json) {` +
       entity.properties
         .map((property) => generatorFromJsonCode(property))
-        .join() +
+        .join("") +
       `\n  };`;
     // 处理 toJson
     const toJsonCode =
@@ -31,7 +30,7 @@ export const ToDart: CodeTypeTransform = (entities) => {
       `\n    final Map<String, dynamic> data = new Map<String, dynamic>();` +
       entity.properties
         .map((property) => generatorToJsonCode(property))
-        .join() +
+        .join("") +
       `\n  };`;
     code +=
       `class ${entity.name} {` +
@@ -41,7 +40,7 @@ export const ToDart: CodeTypeTransform = (entities) => {
       `\n\n${toJsonCode}` +
       `\n}\n\n`;
   });
-  return "```ts\n" + code + "\n```";
+  return "```dart\n" + code + "\n```";
 };
 
 function generatorFromJsonCode(property: Property) {

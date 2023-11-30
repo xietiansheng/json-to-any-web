@@ -17,7 +17,7 @@ export const ToJava: CodeTypeTransform = (entities) => {
       .join("\n");
     code += `public class ${entity.name} {\n${propertyCode}\n\n${getSetCode} \n}\n\n`;
   });
-  return "```ts\n" + code + "\n```";
+  return "```java\n" + code + "\n```";
 };
 
 function generatorGetSetCode(property: Property) {

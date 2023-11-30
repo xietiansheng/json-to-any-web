@@ -15,53 +15,48 @@
         center
       />
       <toolbar />
-      <el-row class="overflow-hidden flex-1">
-        <el-col :xs="12" :span="12" class="h-full">
-          <div class="flex flex-col h-full overflow-hidden">
-            <div class="flex-1 overflow-auto">
-              <json-editor
-                v-model:value="jsonCode"
-                mode="code"
-                @json-change="onJsonChanged"
-                @has-error="onJsonError"
-              />
-            </div>
-            <div class="max-h-200px flex flex-col">
-              <el-input
-                v-model="filterCodeInputVal"
-                class="filter-input"
-                type="textarea"
-                clearable
-                :autosize="{ minRows: 1, maxRows: 3 }"
-                placeholder="代码过滤，例：data.map((item)=>item.name)"
-                @click="onFilterCodeInputClick()"
-              />
-              <div class="flex-1 h-100px relative">
-                <div
-                  class="flex-center py-4px text-14px cursor-pointer gap-4px text-white"
-                  style="position: absolute; top: 20px; right: 20px"
-                  @click="closeFilterResult()"
-                >
-                  收起<el-icon
-                    ><d-arrow-right style="transform: rotate(90deg)"
-                  /></el-icon>
-                </div>
-                <transition name="slide-fade">
-                  <markdown-preview
-                    v-show="showFilterResult"
-                    :value="fullFilterCode"
-                    class="h-full"
-                    style="
-                      border-right: 1px solid #f5f5f5;
-                      transition: all 0.3s;
-                    "
-                  />
-                </transition>
+      <section class="overflow-hidden flex-1 flex">
+        <div class="flex-1 flex flex-col h-full overflow-hidden">
+          <div class="flex-1 overflow-auto">
+            <json-editor
+              v-model:value="jsonCode"
+              mode="code"
+              @json-change="onJsonChanged"
+              @has-error="onJsonError"
+            />
+          </div>
+          <div class="max-h-200px flex flex-col">
+            <el-input
+              v-model="filterCodeInputVal"
+              class="filter-input"
+              type="textarea"
+              clearable
+              :autosize="{ minRows: 1, maxRows: 3 }"
+              placeholder="代码过滤，例：data.map((item)=>item.name)"
+              @click="onFilterCodeInputClick()"
+            />
+            <div class="flex-1 h-100px relative">
+              <div
+                class="flex-center py-4px text-14px cursor-pointer gap-4px text-white"
+                style="position: absolute; top: 20px; right: 20px"
+                @click="closeFilterResult()"
+              >
+                收起<el-icon
+                  ><d-arrow-right style="transform: rotate(90deg)"
+                /></el-icon>
               </div>
+              <transition name="slide-fade">
+                <markdown-preview
+                  v-show="showFilterResult"
+                  :value="fullFilterCode"
+                  class="h-full"
+                  style="border-right: 1px solid #f5f5f5; transition: all 0.3s"
+                />
+              </transition>
             </div>
           </div>
-        </el-col>
-        <el-col :xs="12" :span="12" class="h-full relative">
+        </div>
+        <div class="flex-1 h-full relative overflow-auto">
           <code-result :code-text="mdCodeText" />
           <transition name="slide-fade">
             <code-filter-result
@@ -80,8 +75,8 @@
               "
             />
           </transition>
-        </el-col>
-      </el-row>
+        </div>
+      </section>
       <github-logo />
     </div>
   </div>
@@ -157,9 +152,9 @@ const filterCode = computed(() => {
       "\n<p style='padding: 10px;font-size: 16px;color:#f0f2f5'>🧑‍💻：" +
       `<span style='color: #a9b7c6;'>请在左侧输入框，输入js过滤代码，例如：</span></p>` +
       "\n<p style='padding: 10px;font-size: 16px;color:#f0f2f5'>✅：" +
-      `<span style='color: #a9b7c6;'>data.filter(item=>item.age>20)</span></p>` +
+      `<span style='color: #a9b7c6;'>data.info</span></p>` +
       "\n<p style='padding: 10px;font-size: 16px;color:#f0f2f5'>✅：" +
-      `<span style='color: #a9b7c6;'>data.reduce((pre,item) => pre+=item.brand, "")</span></p>` +
+      `<span style='color: #a9b7c6;'>data.brand.reduce((pre,item) => pre+=(item.price || 0) , 0)</span></p>` +
       "\n<p style='padding: 10px;font-size: 16px;color:#f0f2f5'>✅：" +
       `<span style='color: #a9b7c6;'>......</span></p>` +
       ""
