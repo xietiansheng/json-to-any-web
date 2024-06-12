@@ -29,7 +29,7 @@
 
 ## 📝 Use
 
-Online Address：[https://github.com/xietiansheng/json-to-any-web](http://xiets.gitee.io/json-to-any-web/)
+Online Address：[https://xietiansheng.github.io/json-to-any-web/](http://xiets.gitee.io/json-to-any-web/)
 （ [GitHub](https://github.com/xietiansheng/json-to-any-web) / [Gitee](https://gitee.com/XieTS/json-to-any-web) ）
 
 you can also `Fork` the project to customize the code generation results and freely manipulate the generated results.
